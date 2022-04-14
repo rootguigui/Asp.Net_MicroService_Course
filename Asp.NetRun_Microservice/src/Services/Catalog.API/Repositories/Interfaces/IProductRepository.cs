@@ -5,11 +5,11 @@ namespace Catalog.API.Repositories.Interfaces
     public interface IProductRepository
     {
         Task<IEnumerable<Product>> GetProducts();
-        Task<Product> GetProductById(int id);
-        Task<Product> GetProductByName(string name);
+        Task<Product> GetProductById(string id);
+        Task<IEnumerable<Product>> GetProductByName(string name);
         Task<IEnumerable<Product>> GetProductByCategory(string categoryName);
         Task CreateProduct(Product product);
-        Task UpdateProduct(Product product);
-        Task<bool> DeleteProduct(int id);
+        Task<bool> UpdateProduct(Product product);
+        Task<bool> DeleteProduct(string id);
     }
 }
