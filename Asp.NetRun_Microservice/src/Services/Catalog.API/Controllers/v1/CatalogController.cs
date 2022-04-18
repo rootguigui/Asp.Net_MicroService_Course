@@ -45,12 +45,20 @@ namespace Catalog.API.Controllers.v1
         public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category) => Ok(await _productRepository.GetProductByCategory(category));
 
         [HttpPost]
-        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
         {
             await _productRepository.CreateProduct(product);
 
             return CreatedAtRoute("GetProduct", new { id = product.Id }, product);
         }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult> UpdateProduct([FromBody] Product product) => Ok(await _productRepository.UpdateProduct(product));
+
+        [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult> DeleteProduct(string id) => Ok(await _productRepository.DeleteProduct(id));
     }
 }
